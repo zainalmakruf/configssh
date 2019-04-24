@@ -22,19 +22,19 @@ id=`echo ${id%%\(*}`;
 id=`echo ${id%% *}`
 if [ "$id" != "0" ] && [ "$id" != "root" ]; then
 	clear
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	echo ""
-	echo -e $R"              PLEASE TYPE "$N $G"SU "$N $R"FIRST              "$N
+	echo $R"              PLEASE TYPE "$N $G"SU "$N $R"FIRST              "$N
 	echo ""
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	exit 0
 else
 	clear
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	echo ""
-	echo -e $R"                     By Zainal                        "$N
+	echo $R"                     By Zainal                        "$N
 	echo ""
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	sleep 1
 fi
 while :
@@ -190,7 +190,7 @@ make_config_9022() {
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-Port 22
+Port 9022
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
@@ -301,16 +301,23 @@ Match User anoncvs
 	PermitTTY no
 	ForceCommand cvs server" >> /etc/ssh/sshd_config
   }
+#
+# Make Config
+set_permit() {
+  sed -i "s/PermitRootLogin prohibit-password/#PermitRootLogin yes/g" /etc/ssh/sshd_config
+  }
+#
 # Set App PUBGMM ...
 clear
-echo -e $P"$divider"$N
-echo -e $C" 1. SSH Config Port 22"$N
-echo -e $C" 2. SSH Config Port 9022"$N
-echo -e $C" 3. Backup Config"$N
-echo -e $C" 4. Restore Config"$N
-echo -e $C" e. Exit"$N
-echo -e $P"$divider"$N
-echo -e -n $C"[CHOOSE MENU CONFIG SSH][Press 'e' to exit] : "$N
+echo $P"$divider"$N
+echo $C" 1. SSH Config Port 22"$N
+echo $C" 2. SSH Config Port 9022"$N
+echo $C" 3. Setting PermitRootLogin"$N
+echo $C" 4. Backup Config"$N
+echo $C" 5. Restore Config"$N
+echo $C" e. Exit"$N
+echo $P"$divider"$N
+echo -n $C"[CHOOSE MENU CONFIG SSH][Press 'e' to exit] : "$N
 read -r option
 case $option in
 	1)
@@ -325,23 +332,28 @@ case $option in
 	;;
 	3)
 	clear
-	 backup_config
+	 set_permit
 	clear
 	;;
 	4)
+	clear
+	 backup_config
+	clear
+	;;
+	5)
 	clear
 	 restore_config
 	clear
 	;;
 	e)
 	clear
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	echo ""
-	echo -e $G"                       DONE                           "$N
+	echo $G"                       DONE                           "$N
 	echo ""
-	echo -e $G"                     By Zainal                        "$N
+	echo $G"                     By Zainal                        "$N
 	echo ""
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	sleep 1
 	exit 0
 	;;
@@ -349,24 +361,24 @@ esac
 #
 # Exit ..
 clear
-echo -e $P"$divider"$N
-echo -e $C"CURRENT CHOOSE MENU CONFIG SSH:"$R $option $N
-echo -e $P"$divider"$N
-echo -e $C"Bash Version:"$B $ver $N
-echo -e $C"Released:"$B $released $N
-echo -e $P"$divider"$N
-echo -e -n $C"[Press 'e' to exit] : "$N
+echo $P"$divider"$N
+echo $C"CURRENT CHOOSE MENU CONFIG SSH:"$R $option $N
+echo $P"$divider"$N
+echo $C"Bash Version:"$B $ver $N
+echo $C"Released:"$B $released $N
+echo $P"$divider"$N
+echo -n $C"[Press 'e' to exit] : "$N
 read -r option
 case $option in
 	e)
 	clear
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	echo ""
-	echo -e $G"                       DONE                           "$N
+	echo $G"                       DONE                           "$N
 	echo ""
-	echo -e $G"                     By Zainal                        "$N
+	echo $G"                     By Zainal                        "$N
 	echo ""
-	echo -e $P"$divider"$N
+	echo $P"$divider"$N
 	sleep 1
 	exit 0
 	;;
