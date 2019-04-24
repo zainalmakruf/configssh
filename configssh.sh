@@ -302,9 +302,9 @@ Match User anoncvs
 	ForceCommand cvs server" >> /etc/ssh/sshd_config
   }
 #
-# Make Config
+# Setting Permit
 set_permit() {
-  sed -i "s/PermitRootLogin prohibit-password/#PermitRootLogin yes/g" /etc/ssh/sshd_config
+  sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
   }
 #
 # Set App PUBGMM ...
